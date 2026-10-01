@@ -123,7 +123,7 @@ main{position:relative;z-index:1}
 
 /* ============ HERO ============ */
 #hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;overflow:clip}
-#field{position:absolute;inset:0;width:100%;height:100%}
+#field{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
 .hero-inner{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:calc(var(--pad) + 4.5rem) var(--pad) clamp(1.6rem,4vh,3rem);max-width:1720px;margin:0 auto;width:100%}
 .hero-top-meta{display:flex;justify-content:space-between;gap:2rem;margin-bottom:auto;padding-top:1.2rem;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
 .hero-title{font-family:var(--fd);font-weight:600;font-size:clamp(1.5rem,7.4vw,8.6rem);line-height:1.08;letter-spacing:-.02em;margin:clamp(2.5rem,8vh,4.5rem) 0 clamp(2rem,6vh,3.5rem)}
@@ -319,6 +319,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
 <body>
 
 <div id="grain"></div>
+<canvas id="field"></canvas>
 
 <!-- Cursor -->
 <div id="cursor">
@@ -387,7 +388,6 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
 <main>
   <!-- HERO -->
   <section id="hero">
-    <canvas id="field"></canvas>
     <div class="hero-inner">
       <div class="hero-top-meta">
         <span class="hero-fade">Portfolio ©2025</span>
@@ -1001,8 +1001,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   /* ---------- Hero canvas: interactive dot field ---------- */
   if(!REDUCED){
     const canvas=document.getElementById('field'), ctx=canvas.getContext('2d');
-    const hero=document.getElementById('hero');
-    let pts=[],W=0,H=0,visible=true;
+    let pts=[],W=0,H=0;
     const m={x:-9999,y:-9999,tx:-9999,ty:-9999};
     function build(){
       const dpr=Math.min(devicePixelRatio||1,2);
@@ -1018,9 +1017,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
       const r=canvas.getBoundingClientRect();
       m.tx=e.clientX-r.left; m.ty=e.clientY-r.top;
     });
-    ScrollTrigger.create({trigger:hero,start:'top bottom',end:'bottom top',onToggle:s=>visible=s.isActive});
     gsap.ticker.add(time=>{
-      if(!visible) return;
       m.x = m.tx<-999 ? m.tx : lerp(m.x,m.tx,.12);
       m.y = m.ty<-999 ? m.ty : lerp(m.y,m.ty,.12);
       ctx.clearRect(0,0,W,H);
@@ -1074,7 +1071,6 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   /* ---------- Hero parallax ---------- */
   if(!REDUCED){
     gsap.to('.hero-inner',{y:130,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
-    gsap.to('#field',{opacity:.15,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
   }
 
   /* ---------- Word-scrub paragraphs ---------- */
