@@ -830,6 +830,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   function splitCharsDeep(el){
     const walk = node => [...node.childNodes].forEach(child=>{
       if(child.nodeType===3){
+        if(!child.textContent.trim()) return; /* keep formatting whitespace as-is: wrapping it in .ch boxes would add phantom line boxes */
         const frag=document.createDocumentFragment();
         [...child.textContent].forEach(c=>{
           const s=document.createElement('span'); s.className='ch';
@@ -875,7 +876,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   function heroIntro(){
     const tl = gsap.timeline({defaults:{ease:'power4.out'},onComplete(){ introDone=true; }});
     tl.fromTo('#header',{y:0,yPercent:-110},{yPercent:0,duration:1.1,immediateRender:true},0)
-      .set('.hero-title .r-inner',{clearProps:'transform'},.05)
+      .set('.hero-title .r-inner',{y:0,yPercent:0},.05)
       .fromTo('.hero-fade',{y:24,opacity:0},{y:0,opacity:1,duration:1,stagger:.08},.55);
   }
   function runPreloader(){
