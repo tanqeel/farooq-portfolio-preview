@@ -73,6 +73,7 @@ html.has-cursor #cursor{display:block}
 .pre-name-mask{overflow:hidden}
 .pre-name{font-family:var(--fd);font-weight:600;font-size:clamp(2.6rem,8vw,7rem);letter-spacing:.02em;line-height:1.05}
 .pre-name .ch{display:inline-block;transform:translateY(120%)}
+.pre-name,.pre-tagline{opacity:0} /* hidden until runPreloader reveals them: kills the pre-animation flash */
 .pre-tagline{margin-top:clamp(.9rem,2.2vh,1.5rem);font-family:var(--fb);font-weight:500;font-size:clamp(.85rem,1.7vw,1.35rem);letter-spacing:.015em;color:var(--dim);line-height:1.9}
 .pt-mask{display:inline-block;overflow:hidden;vertical-align:bottom}
 .pt-w{display:inline-block}
@@ -888,6 +889,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     if(lenis) lenis.stop();
     document.documentElement.style.overflow='hidden';
     const chars = splitChars(document.querySelector('.pre-name'));
+    gsap.set(['.pre-name','.pre-tagline'],{opacity:1}); /* reveal after split: the <1s pre-animation flash stays hidden */
     const num=document.getElementById('preNum'), bar=document.getElementById('preBar'), status=document.getElementById('preStatus');
     const states=['INITIALIZING INTERFACE','LOADING MODULES','CALIBRATING MOTION','READY.'];
     const obj={v:0};
