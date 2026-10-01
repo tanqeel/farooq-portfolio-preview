@@ -37,18 +37,15 @@ ul{list-style:none}
 :focus-visible{outline:1px solid var(--acc);outline-offset:3px}
 html.has-cursor,html.has-cursor a,html.has-cursor button,html.has-cursor .work-row,html.has-cursor .acc-head{cursor:none}
 
-/* ============ INITIAL STATES (JS-gated, flash-proof) ============ */
+/* ============ INITIAL STATES ============ */
 html.js .r-inner{transform:translateY(115%);display:block}
-/* hero headline stays put on the homepage — not part of the intro */
-html.js .hero-title .r-inner{transform:none}
 .r-mask{display:block;overflow:hidden}
 html.js [data-fade]{opacity:0;transform:translateY(26px)}
 html.js #header{transform:translateY(-110%)}
 html.js .s-line{transform:scaleX(0);transform-origin:left}
-html.js .hero-fade{opacity:0;transform:translateY(24px)}
 html:not(.js) #preloader{display:none}
 html.reduced #preloader{display:none!important}
-html.reduced .r-inner,html.reduced [data-fade],html.reduced #header,html.reduced .s-line,html.reduced .hero-fade{transform:none!important;opacity:1!important}
+html.reduced .r-inner,html.reduced [data-fade],html.reduced #header,html.reduced .s-line{transform:none!important;opacity:1!important}
 
 /* ============ GRAIN ============ */
 #grain{position:fixed;inset:-100%;width:300%;height:300%;z-index:900;pointer-events:none;opacity:.055;
@@ -75,6 +72,7 @@ html.has-cursor #cursor{display:block}
 .pre-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;padding:0 var(--pad);text-align:center}
 .pre-name-mask{overflow:hidden}
 .pre-name{font-family:var(--fd);font-weight:600;font-size:clamp(2.6rem,8vw,7rem);letter-spacing:.02em;line-height:1.05}
+.pre-name .ch{display:inline-block;transform:translateY(120%)}
 .pre-tagline{margin-top:clamp(.9rem,2.2vh,1.5rem);font-family:var(--fb);font-weight:500;font-size:clamp(.85rem,1.7vw,1.35rem);letter-spacing:.015em;color:var(--dim);line-height:1.9}
 .pt-mask{display:inline-block;overflow:hidden;vertical-align:bottom}
 .pt-w{display:inline-block}
@@ -130,13 +128,13 @@ main{position:relative;z-index:1}
 .hero-top-meta{display:flex;justify-content:space-between;gap:2rem;margin-bottom:auto;padding-top:1.2rem;font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
 .hero-title{font-family:var(--fd);font-weight:600;font-size:clamp(1.5rem,7.4vw,8.6rem);line-height:1.08;letter-spacing:-.02em;margin:clamp(2.5rem,8vh,4.5rem) 0 clamp(2rem,6vh,3.5rem)}
 .hero-title .r-mask{padding-top:.14em;margin-top:-.14em}
-.hero-title .l3{padding-left:clamp(2rem,9vw,11rem)}
+.hero-title .l3{padding-left:clamp(0rem,6vw,7rem)}
 .hero-title .pipe{color:var(--acc)}
 .hero-title .ch{display:inline-block}
 .hero-title em,.contact-title em,.statement em{font-family:var(--fs);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0}
 .hero-title em{color:var(--acc);font-size:.94em}
-.inline-img{display:inline-block;height:.72em;width:1.85em;object-fit:cover;border-radius:999px;transform:translateY(.06em);transition:width .6s var(--ease),filter .6s;filter:grayscale(1) contrast(1.05)}
-.hero-title:hover .inline-img{width:2.6em;filter:grayscale(0) contrast(1)}
+.inline-img{display:inline-block;height:.72em;width:1.85em;object-fit:cover;border-radius:999px;transform:translateY(.06em);transition:width .6s var(--ease);filter:none}
+.hero-title:hover .inline-img{width:2.6em}
 .hero-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:2.5rem;border-top:1px solid var(--line);padding-top:1.6rem}
 .hero-desc{max-width:36ch;color:var(--dim);font-size:1.02rem}
 .hero-desc strong{color:var(--ink);font-weight:500}
@@ -194,11 +192,12 @@ main{position:relative;z-index:1}
 .acc-body-in{padding:0 .5rem 2.4rem;display:grid;grid-template-columns:5rem 1fr;gap:1.5rem}
 .acc-body-in p{color:var(--dim);max-width:58ch;grid-column:2}
 .acc-body-in .tags{grid-column:2;margin-top:1.3rem}
-.tools-label{margin-top:clamp(2.2rem,5vh,3.5rem);font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
-.tools-row{margin-top:1.1rem;display:flex;flex-wrap:wrap;gap:.9rem}
+.tools-row{margin-top:clamp(2.2rem,5vh,3.5rem);display:flex;flex-wrap:wrap;gap:.9rem}
 .toolchip{display:flex;align-items:center;gap:.7rem;border:1px solid var(--line);border-radius:999px;padding:.55rem 1.2rem .55rem .55rem;font-family:var(--fm);font-size:11px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;transition:color .3s,border-color .3s}
 .toolchip b{display:flex;align-items:center;justify-content:center;width:2rem;height:2rem;border-radius:50%;background:var(--panel);color:var(--acc);font-family:var(--fd);font-weight:600;font-size:.7rem;letter-spacing:0}
 .toolchip:hover{color:var(--ink);border-color:var(--acc)}
+.tools-label{margin-top:clamp(2.2rem,5vh,3.5rem);font-family:var(--fm);font-size:11px;letter-spacing:.16em;color:var(--dim);text-transform:uppercase}
+.tools-label + .tools-row{margin-top:1.1rem}
 
 /* ============ WORK ============ */
 .work-list{border-top:1px solid var(--line)}
@@ -327,7 +326,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
   <div class="c-dot"></div>
 </div>
 
-<!-- Preloader: name + tagline stay visible during the whole count -->
+<!-- Preloader -->
 <div id="preloader">
   <div class="pre-inner">
     <div class="pre-meta"><span>MUHAMMAD FAROOQ — PORTFOLIO</span><span>©2025</span></div>
@@ -398,7 +397,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
       <h1 class="hero-title" aria-label="GoHighLevel Expert | CRM and Automation Specialist">
         <span class="r-mask" aria-hidden="true"><span class="r-inner">GoHighLevel Expert</span></span>
         <span class="r-mask" aria-hidden="true"><span class="r-inner"><span class="pipe">|</span> CRM <em>&amp;</em> Automation</span></span>
-        <span class="r-mask l3" aria-hidden="true"><span class="r-inner">Specialist <img class="inline-img" alt="" src="https://picsum.photos/seed/farooq-road/360/140.jpg?grayscale" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 360 140%27><rect width=%27360%27 height=%27140%27 fill=%27%23141412%27/><line x1=%2760%27 y1=%2770%27 x2=%27160%27 y2=%2770%27 stroke=%27%23cdf14e%27 stroke-width=%272%27/><line x1=%27200%27 y1=%2770%27 x2=%27300%27 y2=%2770%27 stroke=%27%23cdf14e%27 stroke-width=%272%27 stroke-dasharray=%276 6%27/><circle cx=%2740%27 cy=%2770%27 r=%2716%27 fill=%27none%27 stroke=%27%23ece9e2%27 stroke-width=%272%27/><circle cx=%2740%27 cy=%2770%27 r=%275%27 fill=%27%23cdf14e%27/><circle cx=%27180%27 cy=%2770%27 r=%2720%27 fill=%27none%27 stroke=%27%23cdf14e%27 stroke-width=%272%27/><path d=%27M172 70l6 6 10-12%27 stroke=%27%23cdf14e%27 stroke-width=%272.5%27 fill=%27none%27/><circle cx=%27320%27 cy=%2770%27 r=%2716%27 fill=%27%23cdf14e%27/></svg>';"></span></span>
+        <span class="r-mask l3" aria-hidden="true"><span class="r-inner">Specialist <img class="inline-img" alt="" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 140'><rect width='360' height='140' fill='%23141412'/><line x1='60' y1='70' x2='160' y2='70' stroke='%23cdf14e' stroke-width='2'/><line x1='200' y1='70' x2='300' y2='70' stroke='%23cdf14e' stroke-width='2' stroke-dasharray='6 6'/><circle cx='40' cy='70' r='16' fill='none' stroke='%23ece9e2' stroke-width='2'/><circle cx='40' cy='70' r='5' fill='%23cdf14e'/><circle cx='180' cy='70' r='20' fill='none' stroke='%23cdf14e' stroke-width='2'/><path d='M172 70l6 6 10-12' stroke='%23cdf14e' stroke-width='2.5' fill='none'/><circle cx='320' cy='70' r='16' fill='%23cdf14e'/><rect x='312' y='62' width='16' height='16' rx='3' fill='%230d0d0c'/></svg>"></span></span>
       </h1>
       <div class="hero-bottom">
         <p class="hero-desc hero-fade">I build <strong>CRM systems</strong>, automation workflows, funnels, and <strong>AI agents</strong> for agencies and service businesses — with GoHighLevel, Make, Zapier, and n8n.</p>
@@ -436,7 +435,10 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
     </div>
     <div class="about-grid">
       <div class="about-media" data-fade>
-        <div class="img-mask"><img id="aboutImg" src="" alt="Muhammad Farooq — GoHighLevel Expert & CRM Automation Specialist"></div>
+        <div class="img-mask">
+          <img id="aboutImg" src="assets/farooq.jpg" alt="Muhammad Farooq — GoHighLevel Expert & CRM Automation Specialist"
+               onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 720 900\'><rect width=\'720\' height=\'900\' fill=\'%23141412\'/><circle cx=\'360\' cy=\'360\' r=\'190\' fill=\'none\' stroke=\'%23cdf14e\' stroke-width=\'3\'/><text x=\'360\' y=\'420\' text-anchor=\'middle\' font-family=\'Arial\' font-weight=\'bold\' font-size=\'150\' fill=\'%23ece9e2\'>MF</text><text x=\'360\' y=\'700\' text-anchor=\'middle\' font-family=\'monospace\' font-size=\'26\' letter-spacing=\'8\' fill=\'%2398958b\'>FAROOQ</text></svg>';">
+        </div>
         <div class="media-caption"><span>MUHAMMAD FAROOQ — GHL SPECIALIST</span><span>MULTAN, 2025</span></div>
       </div>
       <div class="about-copy">
@@ -668,7 +670,7 @@ footer{border-top:1px solid var(--line);padding:clamp(3.5rem,8vh,6rem) var(--pad
   <div class="foot-bar">
     <span>© 2025 Muhammad Farooq — All rights reserved</span>
     <span>GoHighLevel · CRM Automation · Technical Delivery</span>
-    <span>V.2.4 — MULTAN</span>
+    <span>V.2.3 — MULTAN</span>
   </div>
 </footer>
 
@@ -723,22 +725,6 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   if(REDUCED) document.documentElement.classList.add('reduced');
   if(!REDUCED && 'scrollRestoration' in history){ history.scrollRestoration='manual'; window.scrollTo(0,0); }
 
-  /* ---------- Portrait: auto-detect photo, monogram fallback ---------- */
-  const MONOGRAM='data:image/svg+xml;utf8,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 720 900%27><rect width=%27720%27 height=%27900%27 fill=%27%23141412%27/><circle cx=%27360%27 cy=%27360%27 r=%27190%27 fill=%27none%27 stroke=%27%23cdf14e%27 stroke-width=%273%27/><text x=%27360%27 y=%27420%27 text-anchor=%27middle%27 font-family=%27Arial%27 font-weight=%27bold%27 font-size=%27150%27 fill=%27%23ece9e2%27>MF</text><text x=%27360%27 y=%27700%27 text-anchor=%27middle%27 font-family=%27monospace%27 font-size=%2726%27 letter-spacing=%278%27 fill=%27%2398958b%27>FAROOQ</text></svg>';
-  (function loadPortrait(){
-    const img=document.getElementById('aboutImg');
-    if(!img) return;
-    const candidates=['assets/farooq.jpg','farooq.jpg','assets/images/farooq.jpg','images/farooq.jpg','profile.jpg','assets/profile.jpg'];
-    let i=0;
-    (function tryNext(){
-      if(i>=candidates.length){ img.src=MONOGRAM; return; }
-      const test=new Image();
-      test.onload=()=>{ img.src=candidates[i]; };
-      test.onerror=()=>{ i++; tryNext(); };
-      test.src=candidates[i];
-    })();
-  })();
-
   /* ---------- SVG illustration factory (CV-relevant visuals) ---------- */
   const SVG = (inner)=>`data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'>`+
     `<rect width='800' height='600' fill='%23141412'/>`+
@@ -746,6 +732,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     [...Array(15)].map((_,i)=>`<line x1='${i*57}' y1='0' x2='${i*57}' y2='600'/>`).join('')+
     [...Array(11)].map((_,i)=>`<line x1='0' y1='${i*57}' x2='800' y2='${i*57}'/>`).join('')+`</g>`+inner+`</svg>`;
 
+  /* 1 — CRM pipeline board (GoHighLevel / CRM Implementation) */
   const CRM = SVG(
     `<g font-family='monospace' font-size='15' fill='%2398958b'>`+
     ['NEW LEAD','CONTACTED','BOOKED','WON'].map((t,i)=>`<text x='${60+i*180}' y='130'>${t}</text>`).join('')+`</g>`+
@@ -761,6 +748,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     `<text x='400' y='570' text-anchor='middle' font-family='monospace' font-size='15' letter-spacing='4' fill='%2398958b'>GHL PIPELINE — LEAD TO WIN</text>`
   );
 
+  /* 2 — Missed-call text-back (phone + SMS loop) */
   const MCTB = SVG(
     `<rect x='120' y='110' width='220' height='400' rx='34' fill='%230d0d0c' stroke='%23ece9e2' stroke-opacity='.3' stroke-width='2.5'/>`+
     `<rect x='195' y='135' width='70' height='9' rx='4.5' fill='%23ece9e2' fill-opacity='.25'/>`+
@@ -774,6 +762,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     `<text x='560' y='540' text-anchor='middle' font-family='monospace' font-size='15' letter-spacing='4' fill='%2398958b'>SMS AUTO-RECOVERY FLOW</text>`
   );
 
+  /* 3 — Voice AI receptionist (waveform + mic) */
   const VOICE = SVG(
     `<circle cx='400' cy='260' r='120' fill='none' stroke='%23ece9e2' stroke-opacity='.28' stroke-width='2.5'/>`+
     `<circle cx='400' cy='260' r='160' fill='none' stroke='%23ece9e2' stroke-opacity='.12' stroke-width='2'/>`+
@@ -787,6 +776,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     `<text x='400' y='565' text-anchor='middle' font-family='monospace' font-size='15' letter-spacing='4' fill='%2398958b'>VOICE AI — ANSWER · QUALIFY · BOOK</text>`
   );
 
+  /* 4 — Integrations graph (GHL hub + Make/Zapier/n8n/API/Webhooks) */
   const INTEG = SVG(
     `<line x1='400' y1='300' x2='170' y2='150' stroke='%23cdf14e' stroke-width='2' stroke-dasharray='7 7'/>`+
     `<line x1='400' y1='300' x2='630' y2='150' stroke='%23cdf14e' stroke-width='2' stroke-dasharray='7 7'/>`+
@@ -801,6 +791,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     `<text x='400' y='70' text-anchor='middle' font-family='monospace' font-size='15' letter-spacing='4' fill='%2398958b'>CROSS-PLATFORM DATA FLOW</text>`
   );
 
+  /* 5 — Conversion funnel (leads in → customer out) */
   const FUNNEL = SVG(
     `<path d='M140 120 L660 120 L560 240 L240 240 Z' fill='%23191917' stroke='%23ece9e2' stroke-opacity='.3' stroke-width='2'/>`+
     `<path d='M240 260 L560 260 L490 380 L310 380 Z' fill='%23191917' stroke='%23ece9e2' stroke-opacity='.3' stroke-width='2'/>`+
@@ -879,54 +870,46 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
   function tick(){ const t=fmt.format(new Date()); clocks.forEach(c=>c.textContent=t); }
   tick(); setInterval(tick,1000);
 
-  /* ---------- ONE master opening sequence ----------
-     1) FAROOQ + tagline rise in and STAY visible
-     2) counter 0–100 runs while they're on screen
-     3) everything exits upward together
-     4) curtain lifts revealing the homepage hero already in place */
+  /* ---------- Preloader + intro ---------- */
   let introDone=false;
-  function runOpening(){
-    const pre=document.getElementById('preloader');
-    if(REDUCED){ pre.style.display='none'; introDone=true; return; }
+  function heroIntro(){
+    const tl = gsap.timeline({defaults:{ease:'power4.out'},onComplete(){ introDone=true; }});
+    tl.fromTo('#header',{y:0,yPercent:-110},{yPercent:0,duration:1.1,immediateRender:true},0)
+      .fromTo('.hero-title .r-inner',{y:0,yPercent:115},{yPercent:0,duration:1.3,stagger:.11,immediateRender:true},.05)
+      .fromTo('.hero-fade',{y:24,opacity:0},{y:0,opacity:1,duration:1,stagger:.08},.55);
+  }
+  function runPreloader(){
+    if(REDUCED){
+      document.getElementById('preloader').style.display='none';
+      introDone=true;
+      return;
+    }
     if(lenis) lenis.stop();
     document.documentElement.style.overflow='hidden';
-
     const chars = splitChars(document.querySelector('.pre-name'));
     const num=document.getElementById('preNum'), bar=document.getElementById('preBar'), status=document.getElementById('preStatus');
     const states=['INITIALIZING INTERFACE','LOADING MODULES','CALIBRATING MOTION','READY.'];
     const obj={v:0};
-
-    const M=gsap.timeline();
-    /* 1 — entrance */
-    M.fromTo(chars,{y:0,yPercent:120},{yPercent:0,duration:.9,stagger:.055,ease:'power4.out',immediateRender:true},0)
-     .fromTo('.pre-tagline .pt-w',{yPercent:130},{yPercent:0,duration:.85,stagger:.045,ease:'power4.out',immediateRender:true},.45)
-    /* 2 — counter runs while name + tagline remain on screen */
-     .to(obj,{v:100,duration:2.2,ease:'power2.inOut',onUpdate(){
-         const p=Math.round(obj.v);
-         num.textContent=p; gsap.set(bar,{scaleX:p/100});
-         status.textContent = states[ obj.v>=75?3 : obj.v>=50?2 : obj.v>=25?1 : 0 ];
-       }},1.0)
-    /* 3 — exit upward together */
-     .add('exit','+=0.35')
-     .to(chars,{yPercent:-120,duration:.7,stagger:.03,ease:'power3.in'},'exit')
-     .to('.pre-tagline .pt-w',{yPercent:-130,duration:.55,stagger:.025,ease:'power3.in'},'exit')
-     .to(['.pre-count','.pre-status','.pre-meta'],{opacity:0,duration:.4},'exit')
-    /* 4 — curtain lifts, hero already in place underneath */
-     .add('lift','exit+=0.75')
-     .to('.pre-inner',{y:'-12vh',duration:.9,ease:'power4.inOut'},'lift')
-     .to('#preloader',{yPercent:-100,duration:1,ease:'power4.inOut'},'lift')
-     .fromTo('#header',{y:0,yPercent:-110},{yPercent:0,duration:1.1,immediateRender:true,ease:'power4.out'},'lift+=0.35')
-     .fromTo('.hero-fade',{y:24,opacity:0},{y:0,opacity:1,duration:1,stagger:.08,ease:'power4.out'},'lift+=0.85')
-    /* unlock */
-     .call(()=>{
-        pre.style.display='none';
-        if(lenis) lenis.start();
-        document.documentElement.style.overflow='';
-        introDone=true;
-        ScrollTrigger.refresh();
-      },null,'lift+=1.05');
+    const tl=gsap.timeline({onComplete(){
+      document.getElementById('preloader').style.display='none';
+      if(lenis) lenis.start();
+      document.documentElement.style.overflow='';
+      heroIntro();
+    }});
+    tl.fromTo(chars,{y:0,yPercent:120},{yPercent:0,duration:.9,stagger:.055,ease:'power4.out',immediateRender:true})
+      .fromTo('.pre-tagline .pt-w',{yPercent:130},{yPercent:0,duration:.85,stagger:.045,ease:'power4.out',immediateRender:true},'-=.55')
+      .to(obj,{v:100,duration:2,ease:'power2.inOut',onUpdate(){
+          const p=Math.round(obj.v);
+          num.textContent=p; gsap.set(bar,{scaleX:p/100});
+          status.textContent = states[ obj.v>=75?3 : obj.v>=50?2 : obj.v>=25?1 : 0 ];
+        }},'+=.15')
+      .to(chars,{yPercent:-120,duration:.7,stagger:.03,ease:'power3.in'},'-=.1')
+      .to('.pre-tagline .pt-w',{yPercent:-130,duration:.55,stagger:.025,ease:'power3.in'},'<')
+      .to(['.pre-count','.pre-status','.pre-meta'],{opacity:0,duration:.4},'<')
+      .to('.pre-inner',{y:'-12vh',duration:1,ease:'power4.inOut'},'-=.4')
+      .to('#preloader',{yPercent:-100,duration:1,ease:'power4.inOut'},'<');
   }
-  runOpening();
+  runPreloader();
 
   /* ---------- Header behavior ---------- */
   const header=document.getElementById('header');
@@ -1000,7 +983,7 @@ if(!window.gsap){document.documentElement.classList.remove('js');}
     });
   }
 
-  /* ---------- Hero headline: interactive letters (same as footer name) ---------- */
+  /* ---------- Hero headline: interactive letters ---------- */
   const heroLetters = splitCharsDeep(document.querySelector('.hero-title'));
   if(FINE && !REDUCED){
     heroLetters.forEach(ch=>{
